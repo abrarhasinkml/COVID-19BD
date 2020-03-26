@@ -1,0 +1,2 @@
+# COVID-19BD
+A simple visualization script using Plotly to convert the numerical data from IEDCR's website into interactive plots. The data has been scraped from IEDCR's COVID dashboard and some additional data has been added. If you are running the plotting script from a jupyter notebook, the .show() function will suffice. For offline view in IDE's like Spyder, the plot() function has also been written which generates a temporary html file consisting of the plot. 
