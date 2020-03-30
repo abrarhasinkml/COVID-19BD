@@ -6,12 +6,15 @@ Created on Thu Mar 26 13:47:16 2020
 """
 
 import pandas as pd
-
+import chart_studio
 import plotly.express as px
 from plotly.offline import plot
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-
+import chart_studio.plotly as py
+chart_studio.tools.set_credentials_file(username='abrarhasinkml', api_key='78E80pBjGknRHGbml0TJ')
+chart_studio.tools.set_config_file(world_readable=True,
+                             sharing='public')
 data=pd.read_csv('/covid_bd/data.csv')
 
 data.head()
@@ -30,7 +33,8 @@ bar.update_layout(title_text="TOTAL NUMBER OF CASES AS OF TODAY")
 #LETS ALSO PLOT A BAR CHART FOR THE NUMBER OF CASES PER DAY
 dailybar=px.bar(data, x="Date", y='Last 24Hours Cases')
 dailybar.update_layout(title_text="DAILY NEW CASES")
-plot(dailybar)
+#plot(dailybar)
+#dailybar.show()
 
 #NOW LETS TAKE A LOOK AT THE NUMBER OF DAILY RECOVERIES AND DEATHS
 lineplot=make_subplots(specs=[[{'secondary_y':True}]])
@@ -77,5 +81,8 @@ lineplot2.update_layout(title_text="Recovery Rate vs Death Rate in Bangladesh")
 lineplot2.update_xaxes(title_text="Date")
 lineplot2.update_yaxes(title_text="<b>Recovery Rate</b>", secondary_y=False)
 lineplot2.update_yaxes(title_text="<b>Death Rate</b>", secondary_y=True)
-plot(lineplot2)
+#plot(lineplot2)
 #lineplot2.show()
+
+plot_url=py.plot(lineplot2,height=1000,width=1000,auto_open=False,filename='demo')
+print(plot_url)
