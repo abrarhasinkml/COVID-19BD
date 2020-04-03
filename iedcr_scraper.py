@@ -18,7 +18,7 @@ bs4soup=BeautifulSoup(webpg, "html.parser")
 #LETS SCRAPE OUT THE DATE FIRST
 dash=bs4soup.find('div', class_='covid-dash-div')
 findingdate=dash.findAll('p')
-datetext=findingdate[-2].text
+datetext=findingdate[-4].text
 #GOT THE DATE, NOW TO FILTER OUT THE TEXT
 currentdate=''.join([c for c in datetext if c in '0123456789-'])
 #LETS GET THE NUMBERS NOW
