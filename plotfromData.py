@@ -15,7 +15,7 @@ import chart_studio.plotly as py
 chart_studio.tools.set_credentials_file(username='abrarhasinkml', api_key='78E80pBjGknRHGbml0TJ')
 chart_studio.tools.set_config_file(world_readable=True,
                              sharing='public')
-data=pd.read_csv('/covid_bd/data.csv')
+data=pd.read_csv('data.csv')
 
 data.head()
 
@@ -85,19 +85,19 @@ lineplot2.update_yaxes(title_text="<b>Death Rate</b>", secondary_y=True)
 #lineplot2.show()
 
 #URL FOR RECOVERY RATE VS DEATHRATE
-plot_url_rrvsdr=py.plot(lineplot2,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_rrvsdr=py.plot(lineplot2,height=1000,width=1000,auto_open=False,filename='demo1')
 #URL FOR DAILY RECOVERIES
-plot_url_dailyRec=py.plot(dailyRec,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_dailyRec=py.plot(dailyRec,height=1000,width=1000,auto_open=False,filename='demo2')
 #URL FOR TOTAL RECOVERIES
-plot_url_totRec=py.plot(totRec,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_totRec=py.plot(totRec,height=1000,width=1000,auto_open=False,filename='demo3')
 #URL FOR DAILYDEATHS
-plot_url_dd=py.plot(dailyDeaths,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_dd=py.plot(dailyDeaths,height=1000,width=1000,auto_open=False,filename='demo4')
 #URL FOR TOTAL DEATHS
-plot_url_totD=py.plot(totDeaths,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_totD=py.plot(totDeaths,height=1000,width=1000,auto_open=False,filename='demo5')
 #URL FOR RECOVERIES VS DEATHS
-plot_url_rvsd=py.plot(lineplot,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_rvsd=py.plot(lineplot,height=1000,width=1000,auto_open=False,filename='demo6')
 #URL FOR DAILY CASES REPORTED
-plot_url_db=py.plot(dailybar,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_db=py.plot(dailybar,height=1000,width=1000,auto_open=False,filename='demo7')
 #URL FOR TOTAL CASES REPORTED 
-plot_url_bar=py.plot(bar,height=1000,width=1000,auto_open=False,filename='demo')
+plot_url_bar=py.plot(bar,height=1000,width=1000,auto_open=False,filename='demo8')
 

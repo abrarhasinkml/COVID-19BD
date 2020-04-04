@@ -52,6 +52,6 @@ cols=['Date','TOTAL COVID-19 TESTS', 'LAST 24 Hours Test', 'Covid-19 Positive Ca
 df=pd.DataFrame([daily_data],columns=cols)
 lastUpdated=getPrevData["Date"].iloc[-1]
 if currentdate!=lastUpdated:
-    df.to_csv('/covid_bd/data.csv', mode='a', header=False, index=False)    
+    df.to_csv('data.csv', mode='a', header=False, index=False)    
 else:
     print("Today's data is already in your file")
