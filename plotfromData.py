@@ -84,5 +84,20 @@ lineplot2.update_yaxes(title_text="<b>Death Rate</b>", secondary_y=True)
 #plot(lineplot2)
 #lineplot2.show()
 
-plot_url=py.plot(lineplot2,height=1000,width=1000,auto_open=False,filename='demo')
-print(plot_url)
+#URL FOR RECOVERY RATE VS DEATHRATE
+plot_url_rrvsdr=py.plot(lineplot2,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR DAILY RECOVERIES
+plot_url_dailyRec=py.plot(dailyRec,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR TOTAL RECOVERIES
+plot_url_totRec=py.plot(totRec,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR DAILYDEATHS
+plot_url_dd=py.plot(dailyDeaths,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR TOTAL DEATHS
+plot_url_totD=py.plot(totDeaths,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR RECOVERIES VS DEATHS
+plot_url_rvsd=py.plot(lineplot,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR DAILY CASES REPORTED
+plot_url_db=py.plot(dailybar,height=1000,width=1000,auto_open=False,filename='demo')
+#URL FOR TOTAL CASES REPORTED 
+plot_url_bar=py.plot(bar,height=1000,width=1000,auto_open=False,filename='demo')
+
