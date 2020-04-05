@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 import timer
 import pandas as pd
-
+import datetime
 ##LETS GET THE PAGE FIRST
 iedcr_url="https://www.iedcr.gov.bd"
 webpg=requests.get(iedcr_url).text
@@ -51,7 +51,8 @@ daily_data.append(deathToday)
 cols=['Date','TOTAL COVID-19 TESTS', 'LAST 24 Hours Test', 'Covid-19 Positive Cases', 'Last 24Hours Cases', 'Recovered', 'Death Cases', 'Recovery Rate', 'Death Rate', 'New Recoveries', 'Deaths in last 24 hours']
 df=pd.DataFrame([daily_data],columns=cols)
 lastUpdated=getPrevData["Date"].iloc[-1]
-if currentdate!=lastUpdated:
+toXLformat=datetime.datetime.strptime(lastUpdated, "%d/%m/%Y").strftime("%d-%m-%Y")
+if currentdate!=toXLformat:
     df.to_csv('data.csv', mode='a', header=False, index=False)    
 else:
     print("Today's data is already in your file")

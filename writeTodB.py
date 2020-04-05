@@ -28,8 +28,7 @@ def DftoSql(dataframe):
         for(row, rs) in dataframe.iterrows():
             temp=rs[0]
             a=datetime.datetime.strptime(temp, "%d/%m/%Y").date()
-            print(type(a))
-            print(a)
+            #print(type(a))
             b=rs[1]
             c=rs[2]
             d=rs[3]
@@ -40,8 +39,9 @@ def DftoSql(dataframe):
             i=rs[8]
             j=rs[9]
             k=rs[10]
-            query="insert into iedcrdata values ({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})".format(a,b,c,d,e,f,g,h,i,j,k) 
+            query="insert into iedcrdata values ('{}', {}, {}, {}, {}, {}, {}, {}, {}, {}, {})".format(a,b,c,d,e,f,g,h,i,j,k) 
             #query="insert into iedcrdata values ("+ a +",'"+ b +"','"+ c +"','"+ d +"','"+ e +"','"+ f +"','"+ g +"','"+ h +"','"+ i +"','"+ j +"','"+ k +"')" 
+            print(query)
             cur.execute(query)
         conn.commit()
         cur.close()
