@@ -7,7 +7,6 @@ Created on Thu Mar 26 02:51:06 2020
 import bs4
 import requests
 from bs4 import BeautifulSoup
-import timer
 import pandas as pd
 import datetime
 import numpy as np
@@ -25,7 +24,7 @@ for row in table.findAll('tr'):
     c=0
     for c in row.findAll('td'):
         val1=c.text
-        
+
     table_data.append(val1)
 
 totalTests=table_data[2]
@@ -59,7 +58,7 @@ getPrevData=pd.read_csv('data.csv')
 lastUpdated=getPrevData["Date"].iloc[-1]
 toXLformat=datetime.datetime.strptime(lastUpdated, "%d/%m/%Y").strftime("%d-%m-%Y")
 if currDate!=toXLformat:
-    df.to_csv('data.csv', mode='a', header=False, index=False)    
+    df.to_csv('data.csv', mode='a', header=False, index=False)
 else:
     print("Today's data is already in your file")
 
@@ -102,8 +101,8 @@ df=pd.DataFrame([daily_data],columns=cols)
 lastUpdated=getPrevData["Date"].iloc[-1]
 toXLformat=datetime.datetime.strptime(lastUpdated, "%d/%m/%Y").strftime("%d-%m-%Y")
 if currentdate!=toXLformat:
-    df.to_csv('data.csv', mode='a', header=False, index=False)    
+    df.to_csv('data.csv', mode='a', header=False, index=False)
 else:
     print("Today's data is already in your file")
-    
+
 """
