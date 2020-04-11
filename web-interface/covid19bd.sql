@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 04:18 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.1.22
+-- Generation Time: Apr 11, 2020 at 08:52 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -125,7 +124,9 @@ INSERT INTO `iedcrdata` (`Date`, `TOTAL COVID-19 TESTS`, `LAST 24 Hours Test`, `
 ('2020-04-05', 1987, 103, 88, 18, 30, 9, 34.0909, 10.2273, 0, 1),
 ('2020-04-06', 0, 0, 123, 35, 33, 12, 26.8293, 9.7561, 3, 3),
 ('2020-04-07', 4289, 679, 164, 41, 33, 17, 20.122, 10.3659, 0, 5),
-('2020-04-08', 4289, 679, 218, 54, 33, 20, 15.1376, 9.17431, 0, 3);
+('2020-04-08', 4289, 679, 218, 54, 33, 20, 15.1376, 9.17431, 0, 3),
+('2020-04-09', 5983, 905, 330, 112, 33, 21, 10, 6.36364, 0, 1),
+('2020-04-10', 7359, 1184, 424, 94, 33, 27, 7.78302, 6.36792, 0, 6);
 
 -- --------------------------------------------------------
 
