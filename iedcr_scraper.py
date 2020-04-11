@@ -17,9 +17,10 @@ webpg=requests.get(iedcr_url).text
 ##MAKING THE SOUP
 bs4soup=BeautifulSoup(webpg, "html.parser")
 #LETS SCRAPE OUT THE DATE FIRST
-dash=bs4soup.find('div', class_='covid-dash-div')
-table=bs4soup.find('table', class_='zebra')
+dash=bs4soup.findAll('div', class_='col-sm-3')
+table=bs4soup.find('table', class_='table-hover')
 table_data=[]
+val1=""
 for row in table.findAll('tr'):
     c=0
     for c in row.findAll('td'):
@@ -32,16 +33,15 @@ last24hrtests=table_data[1]
 newpos=table_data[3]
 totalpos=table_data[4]
 
-more_counts=dash.findAll('div', class_='counter')
-for i in more_counts:
-    table_data.append(i.text)
+for i in dash:
+    table_data.append(i.h3.text)
 
 newRecs=table_data[5]
 totRecs=table_data[6]
 newDeaths=table_data[7]
 totDeaths=table_data[8]
 
-dateToday=table.find('strong').text
+dateToday=table.find('th').text
 currDate=''.join([i for i  in dateToday if i in '0123456789-'])
 
 recoveryRate=(int(totRecs)/int(totalpos))*100
