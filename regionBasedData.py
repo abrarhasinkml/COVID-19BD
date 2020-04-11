@@ -12,10 +12,10 @@ from mysql.connector import Error
 import  re
 from bs4 import BeautifulSoup
 
-iedcr_web="https://www.iedcr.gov.bd"
+iedcr_web="https://www.iedcr.gov.bd/"
 request_web=requests.get(iedcr_web).text
 soup=BeautifulSoup(request_web, 'html.parser')
-dash=soup.find('section', id='innermid')
+dash=soup.find('div', class_='col-md-12')
 
 find_url=dash.findAll('a')
 theUrlweNeed=find_url[-1]['href']
@@ -37,9 +37,9 @@ tables=camelot.read_pdf('temp.pdf', pages='1-end')
 regionData=tables[0].df
 dhakaData=tables[1].df
 dhakaData2=tables[2].df
+dhakaData2.drop(index=0,axis=1,inplace=True)
 
 dhakaData=pd.concat([dhakaData, dhakaData2], ignore_index=True)
-dhakaData.drop(index=50, axis=1, inplace=True)
 
 regionData.drop(labels=0, axis=1, inplace=True)
 regionData[3]=regionData[1].map(lambda x:re.sub(r'\W+', ' ', x))    
