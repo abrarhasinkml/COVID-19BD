@@ -148,6 +148,26 @@
         .aboutTable tr:nth-child(even) {
           background-color: #dddddd;
         }
+
+        .wrapper {
+          height: 500px !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color:#fff;
+            -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
+        }
+
     </style>
 
   </head>
@@ -266,8 +286,10 @@
 
                       <div class="col-md-9 col-sm-9 ">
                         <div id="chart" class="demo-placeholder">
-                          <div class="chart-container" style="position: relative; height:20vh; width:80vw">
-                            <canvas id="myChart" width="400px" height="80%"></canvas>
+                          <div class="wrapper">
+                            <div class="chart-container" style="position: relative; height:20vh; width:80vw">
+                              <canvas id="myChart" width="400px" height="80%"></canvas>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -458,6 +480,7 @@
           </div>
           <div class="row">
             <div class="col-md-6">
+                              <div class="overflow-auto" style="height:475px;">
                     <?php
                       while ($row = mysqli_fetch_array($covidRes)) { ?>
 
@@ -486,9 +509,12 @@
                      ?>
 
                       <div class="clearfix"></div>
+                    </div>
+
               </div>
 
               <div class="col-md-6 ">
+                <div class="overflow-auto" style="height:475px;">
                       <?php
                         while ($row = mysqli_fetch_array($awareRes)) { ?>
 
@@ -518,8 +544,8 @@
 
                         <div class="clearfix"></div>
                 </div>
-
-          </div>
+              </div>
+          </div> </br> </br>
           <div class="row">
             <div class="col-md-12 col-sm-12 ">
                     <div class="dashboard_graph">
@@ -668,6 +694,7 @@
             }]
           },
           options: {
+            responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
@@ -705,6 +732,7 @@
             }]
           },
           options: {
+              responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
@@ -732,6 +760,7 @@
             }]
           },
           options: {
+            responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
@@ -759,6 +788,7 @@
             }]
           },
           options: {
+            responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
@@ -786,6 +816,7 @@
             }]
           },
           options: {
+            responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
@@ -813,6 +844,7 @@
             }]
           },
           options: {
+            responsive:true,
               scales: {
                   yAxes: [{
                       ticks: {
