@@ -114,6 +114,19 @@
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+          @media (max-width: 991px) {
+          .nav-md .container.body .col-md-3.left_col {
+              display: block;
+          }
+
+          .nav-md .container.body .right_col {
+              margin-left: 230px;
+          }
+      }
+    </style>
+    
   </head>
 
   <body class="nav-md">
@@ -229,7 +242,9 @@
 
                       <div class="col-md-9 col-sm-9 ">
                         <div id="chart" class="demo-placeholder">
-                          <canvas id="myChart" width="400px" height="100%"></canvas>
+                          <div class="chart-container" style="position: relative; height:20vh; width:80vw">
+                            <canvas id="myChart" width="400px" height="80%"></canvas>
+                          </div>
                         </div>
                       </div>
 
