@@ -8,7 +8,7 @@
 
       $dhakaData = "Select * from dhakadata";
 
-      $totalCaseDhaka = "Select * from dhakadata where Location = 'Total'";
+      $totalCaseDhaka = "Select * from regionData where Location = 'Dhaka City'";
 
       $totalRes = mysqli_query($con,$totalCaseDhaka);
 
@@ -71,6 +71,24 @@
       $openCases = round(($underTreatment / $positiveCases[$count-1]) * 100);
 
       $pieData = [round($recoveryRate[$count-1]), round($deathRate[$count-1]), $openCases];
+
+      $regionLocation = array();
+      $regionFreq = array();
+
+      $areaLocation = array();
+      $areaFreq = array();
+
+      while ($row = mysqli_fetch_array($regionRes)) {
+
+          $regionLocation[] = $row['Location'];
+          $regionFreq[] = $row['Freq.'];
+      }
+
+      while ($row = mysqli_fetch_array($dhakaRes)) {
+
+          $areaLocation[] = $row['Location'];
+          $areaFreq[] = $row['Freq.'];
+      }
 
 ?>
 
@@ -179,6 +197,8 @@
                 <?php
                   if($deathRate[$count-1] > $deathRate[$count-2])
                     echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageDeathRate) .'%</i> From last day</span>';
+                  else if(round($deathRate[$count-1] - $deathRate[$count-2]) == 0)
+                    echo '<i class="green">' .abs(round($percentageDeathRate)) .'%</i> From last day</span>';
                   else
                     echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageDeathRate)) .'%</i> From last day</span>';
                 ?>
@@ -228,74 +248,136 @@
                   <h2>Region Based Data</h2>
                   <div class="clearfix"></div>
                 </div>
+                <div class = "prevRegionData">
+
                 <div class="x_content">
 
                   <?php
-
-                          while ($row = mysqli_fetch_array($regionRes)) { ?>
-
-                              <div class="widget_summary" id="regionData">
+                          $x = 0;
+                          while ($x<5) { ?>
+                              <div class="widget_summary">
                                 <div class="w_left w_25">
-                                  <span><?php echo $row['Location']; ?></span>
+                                  <span><?php echo $regionLocation[$x]; ?></span>
                                 </div>
                                 <div class="w_center w_55">
                                   <div class="">
                                     <div class="progress progress" style="width: 76%;">
-                                      <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($row['Freq.']/$positiveCases[$count-1])*100); ?>"></div>
+                                      <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($regionFreq[$x]/$positiveCases[$count-1])*100); ?>"></div>
                                     </div>
                                   </div>
                                 </div>
                                 <div class="w_right w_20">
-                                  <span><?php echo $row['Freq.']; ?></span>
+                                  <span><?php echo $regionFreq[$x]; ?></span>
                                 </div>
                                 <div class="clearfix"></div>
                               </div> <?php
-                          }
+                              $x++;
+                          } ?>
+                    </div>
+                    <div style="text-align:center">
+                      <button id="regionShow" style="border:none;"><img src="./images/showMore.png" style="width:20px;height:20px;"> </button>
+                    </div>
+                  </div>
 
-                  ?>
+                  <div class="regionData" style="display:none;">
+                      <div class="x_content">
+                          <?php
 
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4 ">
-              <div class="x_panel tile fixed_height_390 overflow_hidden">
-                <div class="x_title">
-                  <h2>Dhaka Data</h2>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                  <?php
-
-                          while ($row = mysqli_fetch_array($dhakaRes)) { ?>
+                          for($j = 0; $j < count($regionLocation)-1; $j++) { ?>
 
                             <div class="widget_summary">
                               <div class="w_left w_25">
-                                <span><?php echo $row['Location']; ?></span>
+                                <span><?php echo $regionLocation[$j]; ?></span>
                               </div>
                               <div class="w_center w_55">
                                 <div class="">
                                   <div class="progress progress" style="width: 76%;">
-                                    <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($row['Freq.']/$dhaka)*100); ?>"></div>
+                                    <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($regionFreq[$j]/$positiveCases[$count-1])*100); ?>"></div>
                                   </div>
                                 </div>
                               </div>
                               <div class="w_right w_20">
-                                <span><?php echo $row['Freq.']; ?></span>
+                                <span><?php echo $regionFreq[$j]; ?></span>
                               </div>
                               <div class="clearfix"></div>
-                            </div> <?php
-                          }
+                            </div>
 
-                  ?>
-
+                          <?php
+                          } ?>
+                    </div>
                 </div>
               </div>
             </div>
 
             <div class="col-md-4 col-sm-4 ">
-              <div class="x_panel tile fixed_height_320 overflow_hidden">
+              <div class="x_panel tile">
+                <div class="x_title">
+                  <h2>Dhaka Data</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class = "prevDhakaData">
+
+                <div class="x_content">
+
+                  <?php
+                          $x = 0;
+                          while ($x<5) { ?>
+                              <div class="widget_summary">
+                                <div class="w_left w_25">
+                                  <span><?php echo $areaLocation[$x]; ?></span>
+                                </div>
+                                <div class="w_center w_55">
+                                  <div class="">
+                                    <div class="progress progress" style="width: 76%;">
+                                      <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($areaFreq[$x]/$positiveCases[$count-1])*100); ?>"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="w_right w_20">
+                                  <span><?php echo $areaFreq[$x]; ?></span>
+                                </div>
+                                <div class="clearfix"></div>
+                              </div> <?php
+                              $x++;
+                          } ?>
+                    </div>
+                    <div style="text-align:center">
+                      <button id="dhakaShow" style="border:none;"><img src="./images/showMore.png" style="width:20px;height:20px;"> </button>
+                    </div>
+                  </div>
+
+                  <div class="dhakaData" style="display:none;">
+                      <div class="x_content">
+                          <?php
+
+                          for($j = 0; $j < count($areaLocation)-1; $j++) { ?>
+
+                            <div class="widget_summary">
+                              <div class="w_left w_25">
+                                <span><?php echo $areaLocation[$j]; ?></span>
+                              </div>
+                              <div class="w_center w_55">
+                                <div class="">
+                                  <div class="progress progress" style="width: 76%;">
+                                    <div class="progress-bar bg-red" role="progressbar" data-transitiongoal="<?php echo round(($areaFreq[$j]/$dhaka)*100); ?>"></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="w_right w_20">
+                                <span><?php echo $areaFreq[$j]; ?></span>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+
+                          <?php
+                          } ?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 ">
+              <div class="x_panel tile" style="height:315px">
                 <div class="x_title">
                   <h2>Analysis of Total Cases</h2>
                   <div class="clearfix"></div>
@@ -354,7 +436,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            GGWP INC.
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -376,25 +458,18 @@
     <script src="build/js/custom.min.js"></script>
 
     <script>
-
-          $(document).ready(function () {
-              size_li = $("#regionData").size();
-              /*x=3;
-              $('#myList li:lt('+x+')').show();
-              $('#loadMore').click(function () {
-                  x= (x+5 <= size_li) ? x+5 : size_li;
-                  $('#myList li:lt('+x+')').show();
-              });
-              $('#showLess').click(function () {
-                  x=(x-5<0) ? 3 : x-5;
-                  $('#myList li').not(':lt('+x+')').hide();
-              });*/
-                        console.log($('#regionData'));
-          });
-
-
-
+      $('#regionShow').click(function(){
+        $('.prevRegionData').hide();
+        $('.regionData').show();
+        return false;
+      });
+      $('#dhakaShow').click(function(){
+        $('.prevDhakaData').hide();
+        $('.dhakaData').show();
+        return false;
+      });
     </script>
+
 
     <script>
 
