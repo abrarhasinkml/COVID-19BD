@@ -1,6 +1,7 @@
 <?php
 
       include("config.php");
+      mysqli_set_charset($con,"utf8");
 
       $sql = "Select * from iedcrdata";
 
@@ -90,6 +91,12 @@
           $areaFreq[] = $row['Freq.'];
       }
 
+      $covidSql = "SELECT * FROM `covidnews` WHERE `Title` LIKE '%করোনা%'";
+      $covidRes = mysqli_query($con,$covidSql);
+
+      $awareSql = "SELECT * from awarenessnews";
+      $awareRes = mysqli_query($con,$awareSql);
+
 ?>
 
 <!DOCTYPE html>
@@ -124,9 +131,25 @@
           .nav-md .container.body .right_col {
               margin-left: 230px;
           }
-      }
+        }
+
+        .aboutTable {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        .aboutTable td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        .aboutTable tr:nth-child(even) {
+          background-color: #dddddd;
+        }
     </style>
-    
+
   </head>
 
   <body class="nav-md">
@@ -160,6 +183,7 @@
                     </ul>
                   </li>
                 </ul>
+
               </div>
             </div>
             <!-- /sidebar menu  -->
@@ -392,26 +416,14 @@
             </div>
 
             <div class="col-md-4 col-sm-4 ">
-              <div class="x_panel tile" style="height:315px">
+              <div class="x_panel tile" style="height:311.5px">
                 <div class="x_title">
                   <h2>Analysis of Total Cases</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <table class="" style="width:100%">
-                    <tr>
-                      <th style="width:37%;">
 
-                      </th>
-                      <th>
-                        <div class="col-lg-7 col-md-7 col-sm-7 ">
-                          <p class="">Device</p>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 ">
-                          <p class="">Progress</p>
-                        </div>
-                      </th>
-                    </tr>
                     <tr>
                       <td>
                         <canvas id = "doughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
@@ -443,8 +455,144 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                    <?php
+                      while ($row = mysqli_fetch_array($covidRes)) { ?>
+
+                      <div class="col-lg-12">
+                        <div class="x_panel tile">
+                        <a href = "<?php echo $row['link']; ?>" target="_blank">
+                          <div class="x_content">
+                            <div class="widget_summary">
+                              <div class="w_left w_25">
+                                <img src="<?php echo $row['image']; ?>" style="width:170px;height:100px;">
+                              </div>
+                              <div class="w_center w_55">
+                                <div class="">
+                                    <h6> <?php echo $row['Title']; ?></h6>
+                                    <p>Source: <?php echo $row['Source']; ?></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <?php
+                      }
+                     ?>
+
+                      <div class="clearfix"></div>
+              </div>
+
+              <div class="col-md-6 ">
+                      <?php
+                        while ($row = mysqli_fetch_array($awareRes)) { ?>
+
+                          <div class="col-lg-12">
+                            <div class="x_panel tile">
+                            <a href = "<?php echo $row['link']; ?>" target="_blank">
+                              <div class="x_content">
+                                <div class="widget_summary">
+                                  <div class="w_left w_25">
+                                    <img src="<?php echo $row['image']; ?>" style="width:170px;height:100px;">
+                                  </div>
+                                  <div class="w_center w_55">
+                                    <div class="">
+                                        <h6> <?php echo $row['Title']; ?></h6>
+                                        <p>Source: <?php echo $row['Source']; ?></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+
+                      <?php
+                        }
+                       ?>
+
+                        <div class="clearfix"></div>
+                </div>
 
           </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                    <div class="dashboard_graph">
+
+                      <div class="x_panel tile">
+                        <div class="x_title">
+                          <h1>About</h2>
+                          <div class="clearfix"></div>
+                        </div>
+
+                      <div class="col-lg-12">
+                        <div class="x_content">
+                          <p align="justify">COVID-19 Stat BD (Bangladesh) is a community-based website that comprises various data surrounding the Coronavirus pandemic in Bangladesh. The data shown in the website is collected from IEDCR (Institute of Epidemiology, Disease Control and Research) daily. The page serves as a portal for the public to view the status of the disease outbreak in Bangladesh. We aim to present the data in a more visual manner for the general population. The platform is continuously under works for improvement that makes data more accessible to the general public. </p> </br>
+
+                          <p>We thank you for visiting the page. Stay safe, stay indoors.</p> </br>
+                          <p>The sources of the data can be found in the table below:</p> </br>
+                      <table class="aboutTable">
+                        <tr>
+                          <th>Data</th>
+                          <th>Description</th>
+                          <th>Source</th>
+                        </tr>
+                        <tr>
+                          <td>Daily tally of COVID-19</td>
+                          <td>The total number of COVID-19 positive cases </br>
+                              The number of COVID-19 positives in the last 24 hours </br>
+                              Number of Recoveries in Total and in the last 24 hours </br>
+                              Number of Deaths in Total and in the last 24 hours
+                          </td>
+                          <td><a href="https://www.iedcr.gov.bd">IEDCR</a></td>
+                        </tr>
+                        <tr>
+                          <td>Recovery Rate</td>
+                          <td>Calculated using </br>
+                             *Total Recovered </br>
+                             *Total Positives</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Death Rate</td>
+                          <td>Calculated using </br>
+                             *Total Deaths </br>
+                             *Total Positives</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Region Based & Area wise (Dhaka) Tally</td>
+                          <td> A tally count of the number of affected presented in an area wise manner</td>
+                          <td>IEDCR ( Distribution of confirmed cases in Bangladesh )</td>
+                        </tr>
+                        <tr>
+                          <td>News Ticker</td>
+                          <td>Recent news from national news portals and e-papers</td>
+                          <td> <a href="https://www.ittefaq.com.bd/national">Ittefaq </a></br>
+                               <a href="https://www.prothomalo.com/bangladesh">Prothom Alo </a> </br>
+                               <a href="https://www.bbc.com/bengali">BBC Bangla </a> </br>
+                               <a href="https://bangla.bdnews24.com/covid19-awareness-video/">Ntv BD </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Awareness Ticker</td>
+                          <td>Facts and awareness related articles about COVID-19</td>
+                          <td><a href="https://bangla.bdnews24.com/covid19-awareness-video/">Bdnews24.com</a></td>
+                        </tr>
+                      </table>
+                      </div>
+                      </div>
+
+                      <div class="clearfix"></div>
+                    </div>
+          </div>
+        </div>
+      </div>
         </div>
         <!-- /page content -->
 
