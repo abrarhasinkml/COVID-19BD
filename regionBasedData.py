@@ -11,6 +11,8 @@ import mysql.connector
 from mysql.connector import Error
 import  re
 from bs4 import BeautifulSoup
+from geopy.geocoders import Nominatim
+
 
 iedcr_web="https://www.iedcr.gov.bd/"
 request_web=requests.get(iedcr_web).text
@@ -37,7 +39,6 @@ tables=camelot.read_pdf('temp.pdf', pages='1-end')
 regionData=tables[0].df
 dhakaData=tables[1].df
 dhakaData2=tables[2].df
-dhakaData2.drop(index=0,axis=1,inplace=True)
 
 dhakaData=pd.concat([dhakaData, dhakaData2], ignore_index=True)
 
@@ -47,14 +48,29 @@ regionData.drop(labels=1, axis=1, inplace=True)
 
 regionData.columns=regionData.iloc[0]
 regionData.drop(index=0, axis=0, inplace=True)
+regionData.reset_index(inplace=True)
+regionData['Latitude Longitude']=regionData['District City'].apply(lambda x: convert_to_latLong(x, "Bangladesh"))
+regionData[['Latitude','Longitude']]=pd.DataFrame(regionData['Latitude Longitude'].tolist(), index=regionData.index)
+regionData.drop('Latitude Longitude', axis='columns', inplace=True)
 regionData.set_index('District City', inplace=True)
-
+regionData.drop('index', axis=1, inplace=True)
 dhakaData.columns=dhakaData.iloc[0]
 dhakaData.drop(index=0, inplace=True)
-
+dhakaData['Latitude Longitude']=dhakaData['Location'].apply(lambda x: convert_to_latLong(x, "Dhaka"))
+dhakaData[['Latitude','Longitude']]=pd.DataFrame(dhakaData['Latitude Longitude'].tolist(), index=dhakaData.index)
+dhakaData.drop('Latitude Longitude', axis='columns', inplace=True)
 dhakaData.set_index('Location', inplace=True)
 
+##Let's try converting it to lat long##
 
+def convert_to_latLong(x, y):
+    try:
+        address=x+","+y
+        geoloc=Nominatim()
+        loc=geoloc.geocode(address)
+        return loc.latitude, loc.longitude
+    except:
+        return 0, 0
 
 ##LETS SAVE TO THE DB##
 
@@ -69,7 +85,9 @@ def DftoSql(dataframe, tableName):
         for(row, rs) in dataframe.iterrows():
             a=rs[0]
             b=rs[1]
-            query="insert into {} values ('{}', {})".format(tableName,a,b) 
+            c=rs[2]
+            d=rs[3]
+            query="insert into {} values ('{}', {}, {}, {})".format(tableName,a,b,c,d) 
             #query="insert into iedcrdata values ("+ a +",'"+ b +"','"+ c +"','"+ d +"','"+ e +"','"+ f +"','"+ g +"','"+ h +"','"+ i +"','"+ j +"','"+ k +"')" 
             print(query)
             cur.execute(query)
