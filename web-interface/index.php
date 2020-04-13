@@ -289,10 +289,10 @@
 
                       <div class="col-md-9 col-sm-9 ">
                       <canvas id="myChart" height="fit-content" width="fit-content"></canvas>
-                      <div class="clearfix"></div> 
+                      <div class="clearfix"></div>
                       </div>
 
-                      
+
                     </div>
           </div>
         </div>
@@ -487,10 +487,10 @@
                         <a href = "<?php echo $row['link']; ?>" target="_blank">
                           <div class="x_content">
                             <div class="widget_summary">
-                              <div class="w_left w_25">
+                              <div class="w_left w_45">
                                 <img src="<?php echo $row['image']; ?>" style="width:170px;height:100px;">
                               </div>
-                              <div class="w_center w_55">
+                              <div class="w_right w_55">
                                 <div class="">
                                     <h6> <?php echo $row['Title']; ?></h6>
                                     <p>Source: <?php echo $row['Source']; ?></p>
@@ -521,10 +521,10 @@
                             <a href = "<?php echo $row['link']; ?>" target="_blank">
                               <div class="x_content">
                                 <div class="widget_summary">
-                                  <div class="w_left w_25">
+                                  <div class="w_left w_45">
                                     <img src="<?php echo $row['image']; ?>" style="width:170px;height:100px;">
                                   </div>
-                                  <div class="w_center w_55">
+                                  <div class="w_right w_55">
                                     <div class="">
                                         <h6> <?php echo $row['Title']; ?></h6>
                                         <p>Source: <?php echo $row['Source']; ?></p>
