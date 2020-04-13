@@ -167,6 +167,9 @@
             background-color:#fff;
             -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
         }
+        #myChart{
+          responsive: True;
+        }
 
     </style>
 
@@ -285,16 +288,11 @@
                       </div>
 
                       <div class="col-md-9 col-sm-9 ">
-                        <div id="chart" class="demo-placeholder">
-                          <div class="wrapper">
-                            <div class="chart-container" style="position: relative; height:20vh; width:80vw">
-                              <canvas id="myChart" width="400px" height="80%"></canvas>
-                            </div>
-                          </div>
-                        </div>
+                      <canvas id="myChart" height="fit-content" width="fit-content"></canvas>
+                      <div class="clearfix"></div> 
                       </div>
 
-                      <div class="clearfix"></div>
+                      
                     </div>
           </div>
         </div>
