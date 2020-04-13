@@ -6,7 +6,6 @@ Created on Sun Apr  5 00:41:36 2020
 """
 
 import pandas as pd
-import numpy as np
 import mysql.connector
 from mysql.connector import Error
 import datetime
@@ -47,6 +46,8 @@ def DftoSql(dataframe):
         cur.close()
     except Error as e:
         print("Error in MySQL connection :", e)
+        logfile=open("dbWriter.txt", 'a').write("'{}' data could not be stored in DB\n".format(datetime.date.today()))
+        logfile.close()
     finally:
         conn.close()
         
