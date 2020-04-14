@@ -38,5 +38,4 @@ while True:
         time.sleep(216000)
     else:
         infinite_logger=open('infinitelooperlog.txt').write("'{}' was not stored because of no new updates.\n".format(datetime.datetime.now()))
-        infinite_logger.close()
         time.sleep(216000)

@@ -62,4 +62,4 @@ try:
         print("Today's data is already in your file")
 except:
     logfile=open('IEDCRSCRAPER_Log.txt', 'a').write("'{}'- data could not be retrieved\n".format(datetime.date.today()))
-    logfile.close()
+    

@@ -18,10 +18,9 @@ try:
     iedcr_web="https://www.iedcr.gov.bd/"
     request_web=requests.get(iedcr_web).text
     soup=BeautifulSoup(request_web, 'html.parser')
-    dash=soup.find('div', class_='col-md-12')
+    dash=soup.findAll('a')
     
-    find_url=dash.findAll('a')
-    theUrlweNeed=find_url[-1]['href']
+    theUrlweNeed=dash[-2]['href']
     
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     
@@ -40,7 +39,7 @@ try:
     regionData=tables[0].df
     dhakaData=tables[1].df
     dhakaData2=tables[2].df
-    
+    #dhakaData3=tables[3].df
     dhakaData=pd.concat([dhakaData, dhakaData2], ignore_index=True)
     
     regionData.drop(labels=0, axis=1, inplace=True)
@@ -109,5 +108,4 @@ try:
     os.remove('temp.pdf')
 except:
     logfile=open("regionDataScraper.txt", 'a').write("'{}' data could not be read\n".format(datetime.date.today()))
-    logfile.close()
     
