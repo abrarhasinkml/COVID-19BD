@@ -41,6 +41,18 @@ try:
     dhakaData2=tables[2].df
     #dhakaData3=tables[3].df
     dhakaData=pd.concat([dhakaData, dhakaData2], ignore_index=True)
+    ##Let's try converting it to lat long##
+    
+    def convert_to_latLong(x, y):
+        try:
+            address=x+","+y
+            geoloc=Nominatim()
+            loc=geoloc.geocode(address)
+            return loc.latitude, loc.longitude
+        except:
+            return 0, 0
+    
+    
     
     regionData.drop(labels=0, axis=1, inplace=True)
     regionData[3]=regionData[1].map(lambda x:re.sub(r'\W+', ' ', x))    
@@ -60,17 +72,6 @@ try:
     dhakaData[['Latitude','Longitude']]=pd.DataFrame(dhakaData['Latitude Longitude'].tolist(), index=dhakaData.index)
     dhakaData.drop('Latitude Longitude', axis='columns', inplace=True)
     dhakaData.set_index('Location', inplace=True)
-    
-    ##Let's try converting it to lat long##
-    
-    def convert_to_latLong(x, y):
-        try:
-            address=x+","+y
-            geoloc=Nominatim()
-            loc=geoloc.geocode(address)
-            return loc.latitude, loc.longitude
-        except:
-            return 0, 0
     
     ##LETS SAVE TO THE DB##
     
