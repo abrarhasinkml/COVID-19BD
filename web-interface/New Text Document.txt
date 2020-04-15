@@ -1,8 +1,8 @@
-database named “tusherco_covid19bd”.
+database named “covidsta_19bd”.
 
 Username:
-tusherco_db
+covidsta_admin
 
-K3cRUHMqmqfM2sa
+mKvZD%(igJZ$
 
 localhost:3306

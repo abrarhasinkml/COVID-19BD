@@ -5,7 +5,7 @@
 
       $sql = "Select * from iedcrdata";
 
-      $regionData = "Select * from regiondata";
+      $regionData = "Select * from regionData";
 
       $dhakaData = "Select * from dhakadata";
 
@@ -16,7 +16,6 @@
       $totData = mysqli_fetch_array($totalRes);
 
       $dhaka = $totData['Freq.'];
-
 
       $res = mysqli_query($con,$sql);
 
@@ -173,15 +172,28 @@
 
     </style>
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KKH7447');</script>
+    <!-- End Google Tag Manager -->
+
   </head>
 
   <body class="nav-md">
+      <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKH7447"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+     <!-- End Google Tag Manager (noscript) -->
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>COVID-19</span></a>
+               <a href="index.php" class="site_title"><img src="images/main_image.png" alt="Covid19BD"  style='height: 100%; width: 100%; object-fit: contain'></a>
             </div>
 
             <div class="clearfix"></div>
@@ -192,7 +204,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home <span class="fa"></span></a>
 
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation<span class="fa fa-chevron-down"></span></a>
@@ -281,7 +293,7 @@
 
                       <div class="row x_title">
                         <div class="col-md-6">
-                          <h3 id="graphTitle">Death / Recovery Rate</h3>
+                          <h3 id="graphTitle">Total Cases</h3>
                         </div>
                         <div class="col-md-6">
                         </div>
@@ -342,7 +354,7 @@
                       <div class="x_content">
                           <?php
 
-                          for($j = 0; $j < count($regionLocation)-1; $j++) { ?>
+                          for($j = 0; $j < count($regionLocation); $j++) { ?>
 
                             <div class="widget_summary">
                               <div class="w_left w_25">
@@ -363,7 +375,11 @@
 
                           <?php
                           } ?>
+                          <div style="text-align:center">
+                            <button id="regionHide" style="border:none;"><img src="./images/showLess.png" style="width:20px;height:20px;"> </button>
+                          </div>
                     </div>
+
                 </div>
               </div>
             </div>
@@ -399,6 +415,7 @@
                               </div> <?php
                               $x++;
                           } ?>
+
                     </div>
                     <div style="text-align:center">
                       <button id="dhakaShow" style="border:none;"><img src="./images/showMore.png" style="width:20px;height:20px;"> </button>
@@ -430,6 +447,9 @@
 
                           <?php
                           } ?>
+                          <div style="text-align:center">
+                            <button id="dhakaHide" style="border:none;"><img src="./images/showLess.png" style="width:20px;height:20px;"> </button>
+                          </div>
                     </div>
                 </div>
               </div>
@@ -623,7 +643,14 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            GGWP INC.
+            <!-- hitwebcounter Code START -->
+            <a href="https://www.hitwebcounter.com" target="_blank">
+            <img src="https://hitwebcounter.com/counter/counter.php?page=7230694&style=0007&nbdigits=5&type=ip&initCount=0" title="User Stats" Alt="PHP Hits Count"   border="0" >
+            </a>
+            Unique Visitors
+          </div> </br>
+          <div class="pull-right">
+            GGWP
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -650,9 +677,19 @@
         $('.regionData').show();
         return false;
       });
+      $('#regionHide').click(function(){
+        $('.prevRegionData').show();
+        $('.regionData').hide();
+        return false;
+      });
       $('#dhakaShow').click(function(){
         $('.prevDhakaData').hide();
         $('.dhakaData').show();
+        return false;
+      });
+      $('#dhakaHide').click(function(){
+        $('.prevDhakaData').show();
+        $('.dhakaData').hide();
         return false;
       });
     </script>
@@ -853,7 +890,7 @@
           }
       };
 
-      var rate = new Chart(graph1,rateChart);
+      var rate = new Chart(graph1,totalCases);
 
       $('#rate').click(function(){
         $("#graphTitle").html("Death/Recovery Rate");
