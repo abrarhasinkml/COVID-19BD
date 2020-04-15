@@ -53,9 +53,9 @@
 
       $count = count($totalTests);
 
-      $percentagePositive = ($last24HoursCases[$count-1] / $positiveCases[$count-1]) * 100;
+      $percentagePositive = ($last24HoursCases[$count-1] / $positiveCases[$count-2]) * 100;
 
-      $percentageDeath = ($deathsInLast24Hours[$count-1] / $deathCases[$count-1]) * 100;
+      $percentageDeath = ($deathsInLast24Hours[$count-1] / $deathCases[$count-2]) * 100;
 
       $percentageRecovery = $recoveryRate[$count-1] - $recoveryRate[$count-2];
 
@@ -177,16 +177,17 @@
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KKH7447');</script>
+    })(window,document,'script','dataLayer','GTM-K85WRB2');</script>
     <!-- End Google Tag Manager -->
 
   </head>
 
   <body class="nav-md">
-      <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKH7447"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-     <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K85WRB2"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div class="container body">
       <div class="main_container">
