@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import datetime
+import time
 import mysql.connector
 from mysql.connector import Error
 
@@ -112,8 +113,50 @@ for i in mRead:
         src=bbc_base
         news=[d,title,image,link,src]
         newsLists.append(news)
-        
-        
+
+
+##DHAKA TRIBUNE##
+
+dtlink="https://www.dhakatribune.com"
+req_dtlink=requests.get(dtlink, headers).text
+
+dtsoup=BeautifulSoup(req_dtlink, 'html.parser')
+findlinks=dtsoup.find('section', class_='banner_btm-cont').findAll('a')
+
+
+for i in findlinks:
+    d=date
+    newlink=dtlink+i['href']
+    newRequest=requests.get(newlink,headers).text
+    newSoup=BeautifulSoup(newRequest,'html.parser')
+    title=newSoup.find('meta', property='og:title')['content']
+    image=newSoup.find('meta', property='og:image')['content']
+    url=newlink
+    source=dtlink
+    news=[d,title,image,url,source]
+    newsLists.append(news)
+            
+
+##BANGLA DT##
+bdtlink="https://bangla.dhakatribune.com/articles/bangladesh"
+req_bdtlink=requests.get(bdtlink, headers).text
+
+bdtsoup=BeautifulSoup(req_bdtlink, 'html.parser')
+bfindlinks=bdtsoup.findAll('div', class_="col-sm-4")
+base_url="https://bangla.dhakatribune.com"
+for i in bfindlinks:
+     findurl=i.find('a')['href']
+     newUrl=base_url+findurl
+     newReq=requests.get(newUrl).text
+     newSoup=BeautifulSoup(newReq, 'html.parser')
+     title=newSoup.find('meta', property="og:title")['content']
+     image=newSoup.find('meta', property='og:image')['content']
+     url=newUrl
+     src=base_url
+     news=[title,image,url,src]
+     newsLists.append(news)
+     time.sleep(2)
+            
 
 
 ##NOW CREATING A DATAFRAME FROM THE NESTED LISTS##
