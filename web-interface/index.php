@@ -53,9 +53,9 @@
 
       $count = count($totalTests);
 
-      $percentagePositive = ($last24HoursCases[$count-1] / $positiveCases[$count-3]) * 100;
+      $percentagePositive = ($last24HoursCases[$count-1] / $positiveCases[$count-2]) * 100;
 
-      $percentageDeath = ($deathsInLast24Hours[$count-1] / $deathCases[$count-3]) * 100;
+      $percentageDeath = ($deathsInLast24Hours[$count-1] / $deathCases[$count-2]) * 100;
 
       $percentageRecovery = $recoveryRate[$count-1] - $recoveryRate[$count-2];
 
