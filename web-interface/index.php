@@ -17,7 +17,6 @@
 
       $dhaka = $totData['Freq.'];
 
-
       $res = mysqli_query($con,$sql);
 
       $regionRes = mysqli_query($con,$regionData);
@@ -363,7 +362,11 @@
 
                           <?php
                           } ?>
+                          <div style="text-align:center">
+                            <button id="regionHide" style="border:none;"><img src="./images/showLess.png" style="width:20px;height:20px;"> </button>
+                          </div>
                     </div>
+
                 </div>
               </div>
             </div>
@@ -399,6 +402,7 @@
                               </div> <?php
                               $x++;
                           } ?>
+
                     </div>
                     <div style="text-align:center">
                       <button id="dhakaShow" style="border:none;"><img src="./images/showMore.png" style="width:20px;height:20px;"> </button>
@@ -430,6 +434,9 @@
 
                           <?php
                           } ?>
+                          <div style="text-align:center">
+                            <button id="dhakaHide" style="border:none;"><img src="./images/showLess.png" style="width:20px;height:20px;"> </button>
+                          </div>
                     </div>
                 </div>
               </div>
@@ -650,9 +657,19 @@
         $('.regionData').show();
         return false;
       });
+      $('#regionHide').click(function(){
+        $('.prevRegionData').show();
+        $('.regionData').hide();
+        return false;
+      });
       $('#dhakaShow').click(function(){
         $('.prevDhakaData').hide();
         $('.dhakaData').show();
+        return false;
+      });
+      $('#dhakaHide').click(function(){
+        $('.prevDhakaData').show();
+        $('.dhakaData').hide();
         return false;
       });
     </script>
