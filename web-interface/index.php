@@ -5,7 +5,7 @@
 
       $sql = "Select * from iedcrdata";
 
-      $regionData = "Select * from regiondata";
+      $regionData = "Select * from regionData";
 
       $dhakaData = "Select * from dhakadata";
 
@@ -172,9 +172,22 @@
 
     </style>
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KKH7447');</script>
+    <!-- End Google Tag Manager -->
+
   </head>
 
   <body class="nav-md">
+      <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKH7447"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+     <!-- End Google Tag Manager (noscript) -->
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -280,7 +293,7 @@
 
                       <div class="row x_title">
                         <div class="col-md-6">
-                          <h3 id="graphTitle">Death / Recovery Rate</h3>
+                          <h3 id="graphTitle">Total Cases</h3>
                         </div>
                         <div class="col-md-6">
                         </div>
@@ -341,7 +354,7 @@
                       <div class="x_content">
                           <?php
 
-                          for($j = 0; $j < count($regionLocation)-1; $j++) { ?>
+                          for($j = 0; $j < count($regionLocation); $j++) { ?>
 
                             <div class="widget_summary">
                               <div class="w_left w_25">
@@ -630,7 +643,14 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            GGWP INC.
+            <!-- hitwebcounter Code START -->
+            <a href="https://www.hitwebcounter.com" target="_blank">
+            <img src="https://hitwebcounter.com/counter/counter.php?page=7230694&style=0007&nbdigits=5&type=ip&initCount=0" title="User Stats" Alt="PHP Hits Count"   border="0" >
+            </a>
+            Unique Visitors
+          </div> </br>
+          <div class="pull-right">
+            GGWP
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -870,7 +890,7 @@
           }
       };
 
-      var rate = new Chart(graph1,rateChart);
+      var rate = new Chart(graph1,totalCases);
 
       $('#rate').click(function(){
         $("#graphTitle").html("Death/Recovery Rate");
