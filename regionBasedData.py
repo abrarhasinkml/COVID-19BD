@@ -37,10 +37,13 @@ try:
     reader=open('temp.pdf', 'rb')
     tables=camelot.read_pdf('temp.pdf', pages='1-end')
     regionData=tables[0].df
-    dhakaData=tables[1].df
-    dhakaData2=tables[2].df
+    regionData2=tables[1].df
+    dhakaData=tables[2].df
+    dhakaData2=tables[3].df
+    dhakaData3=tables[4].df
     #dhakaData3=tables[3].df
-    dhakaData=pd.concat([dhakaData, dhakaData2], ignore_index=True)
+    dhakaData=pd.concat([dhakaData, dhakaData2, dhakaData3], ignore_index=True)
+    regionData=pd.concat([regionData, regionData2], ignore_index=True)
     ##Let's try converting it to lat long##
     
     def convert_to_latLong(x, y):
@@ -55,6 +58,7 @@ try:
     
     
     regionData.drop(labels=0, axis=1, inplace=True)
+    regionData.drop(labels=3, axis=1,inplace=True)
     regionData[3]=regionData[1].map(lambda x:re.sub(r'\W+', ' ', x))    
     regionData.drop(labels=1, axis=1, inplace=True)
     
