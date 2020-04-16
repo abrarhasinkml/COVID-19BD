@@ -90,7 +90,7 @@
           $areaFreq[] = $row['Freq.'];
       }
 
-      $covidSql = "SELECT * FROM `covidnews` WHERE `Title` LIKE '%করোনা%'";
+      $covidSql = "SELECT * FROM `covidnews` WHERE `Title` LIKE '%করোনা%' OR `Title` LIKE '%CORONA%'";
       $covidRes = mysqli_query($con,$covidSql);
 
       $awareSql = "SELECT * from awarenessnews";
@@ -255,12 +255,12 @@
               <div class="count green"><?php echo round($recoveryRate[$count-1],2); ?>%</div>
               <span class="count_bottom">
                 <?php
-                  if(round($percentageRecovery) > 0)
-                    echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageRecovery) .'%</i> From last day</span>';
-                  else if(round($percentageRecovery) == 0)
+                  if(round($percentageRecovery,2) > 0)
+                    echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageRecovery,2) .'%</i> From last day</span>';
+                  else if(round($percentageRecovery,2) == 0)
                     echo '<i class="green">' .abs(round($percentageRecovery)) .'%</i> From last day</span>';
                   else
-                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageRecovery)) .'%</i> From last day</span>';
+                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageRecovery,2)) .'%</i> From last day</span>';
                 ?>
             </div>
             <div class="col-md-3 col-sm-4  tile_stats_count">
@@ -270,10 +270,10 @@
                 <?php
                   if($deathRate[$count-1] > $deathRate[$count-2])
                     echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageDeathRate) .'%</i> From last day</span>';
-                  else if(round($deathRate[$count-1] - $deathRate[$count-2]) == 0)
+                  else if(round($deathRate[$count-1] - $deathRate[$count-2],2) == 0)
                     echo '<i class="green">' .abs(round($percentageDeathRate)) .'%</i> From last day</span>';
                   else
-                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageDeathRate)) .'%</i> From last day</span>';
+                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageDeathRate,2)) .'%</i> From last day</span>';
                 ?>
             </div>
             <div class="col-md-3 col-sm-4  tile_stats_count">
