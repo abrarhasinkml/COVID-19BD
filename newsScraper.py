@@ -50,23 +50,23 @@ for i in subNews:
     newsLists.append(news)
     
 ##SCRAPPER FOR NTV_BD##
-ntv_base="https://www.ntvbd.com"
-ntv_req=requests.get(ntv_bd).text
-ntvSoup=BeautifulSoup(ntv_req, 'html.parser')
-mostClicked=ntvSoup.findAll('div', class_="tabs-panel is-active")
-i=0
-for i in mostClicked:
-    d=date
-    get_link=i.findAll('a')
-    for j in get_link:
-        link=ntv_base+j['href']
-        new_req=requests.get(link).text
-        tempSoup=BeautifulSoup(new_req, 'html.parser')
-        title=tempSoup.find('meta', property='og:title')['content']
-        image=tempSoup.find('meta', property='og:image')['content']
-        src=ntv_base
-        news=[d, title, image, link, src]
-        newsLists.append(news)
+#ntv_base="https://www.ntvbd.com"
+#ntv_req=requests.get(ntv_bd).text
+#ntvSoup=BeautifulSoup(ntv_req, 'html.parser')
+#mostClicked=ntvSoup.findAll('div', class_="tabs-panel is-active")
+#i=0
+#for i in mostClicked:
+#    d=date
+#    get_link=i.findAll('a')
+#    for j in get_link:
+#        link=ntv_base+j['href']
+#        new_req=requests.get(link).text
+#        tempSoup=BeautifulSoup(new_req, 'html.parser')
+#        title=tempSoup.find('meta', property='og:title')['content']
+#        image=tempSoup.find('meta', property='og:image')['content']
+#        src=ntv_base
+#        news=[d, title, image, link, src]
+#        newsLists.append(news)
         
 ##SCRAPPER FOR PROTHOM ALO##
 prothomalo_base="https://www.prothomalo.com"

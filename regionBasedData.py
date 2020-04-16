@@ -49,8 +49,9 @@ try:
     def convert_to_latLong(x, y):
         try:
             address=x+","+y
-            geoloc=Nominatim()
+            geoloc=Nominatim(user_agent='my-application')
             loc=geoloc.geocode(address)
+            #print(loc.latitude, loc.longitude)
             return loc.latitude, loc.longitude
         except:
             return 0, 0
@@ -94,7 +95,7 @@ try:
                 d=rs[3]
                 query="insert into {} values ('{}', {}, {}, {})".format(tableName,a,b,c,d) 
                 #query="insert into iedcrdata values ("+ a +",'"+ b +"','"+ c +"','"+ d +"','"+ e +"','"+ f +"','"+ g +"','"+ h +"','"+ i +"','"+ j +"','"+ k +"')" 
-                print(query)
+                #print(query)
                 cur.execute(query)
             conn.commit()
             cur.close()
