@@ -153,7 +153,7 @@ for i in bfindlinks:
      image=newSoup.find('meta', property='og:image')['content']
      url=newUrl
      src=base_url
-     news=[title,image,url,src]
+     news=[d,title,image,url,src]
      newsLists.append(news)
      time.sleep(2)
             

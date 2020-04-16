@@ -15,8 +15,8 @@ while True:
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     req_url=requests.get(url, headers=headers).text
     soup=BeautifulSoup(req_url, 'html.parser')
-    table=soup.find('table', class_='zebra')
-    dateToday=table.find('strong').text
+    table=soup.find('table', class_='table-hover')
+    dateToday=table.find('th').text
     currDate=''.join([i for i  in dateToday if i in '0123456789-'])
     mDate=datetime.date.today()   
     sysDate=datetime.datetime.strptime(str(mDate), "%Y-%m-%d").strftime("%d-%m-%Y")
@@ -32,10 +32,13 @@ while True:
         stream3=open('regionBasedData.py')
         region_reader=stream3.read()
         exec(region_reader)
+        time.sleep(14400)
+        #Testing with 10mins
+        #time.sleep(600)
+    else:
         stream4=open('newsScraper.py')
         news_reader=stream4.read()
         exec(news_reader)
-        time.sleep(216000)
-    else:
-        infinite_logger=open('infinitelooperlog.txt').write("'{}' was not stored because of no new updates.\n".format(datetime.datetime.now()))
-        time.sleep(216000)
+        infinite_logger=open('infinitelooperlog.txt', 'a').write("'{}' was not stored because of no new updates.\n".format(datetime.datetime.now()))
+        time.sleep(14400)
+        #time.sleep(600)
