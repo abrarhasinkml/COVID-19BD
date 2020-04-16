@@ -183,7 +183,7 @@
   </head>
 
   <body class="nav-md">
-    
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K85WRB2"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -285,6 +285,9 @@
               <div class="count red"><?php echo $deathsInLast24Hours[$count-1]; ?></div>
             </div>
           </div>
+        </div>
+        <div>
+          <p>Last Updated: <?php echo date('jS F Y', strtotime($date[$count-1])); ?><p>
         </div>
           <!-- /top tiles -->
 
@@ -427,7 +430,7 @@
                       <div class="x_content">
                           <?php
 
-                          for($j = 0; $j < count($areaLocation)-1; $j++) { ?>
+                          for($j = 0; $j < count($areaLocation); $j++) { ?>
 
                             <div class="widget_summary">
                               <div class="w_left w_25">
