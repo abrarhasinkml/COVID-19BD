@@ -5,11 +5,11 @@
 
       $sql = "Select * from iedcrdata";
 
-      $regionData = "Select * from regionData";
+      $regionData = "Select * from regiondata";
 
       $dhakaData = "Select * from dhakadata";
 
-      $totalCaseDhaka = "Select * from regionData where Location = 'Dhaka City'";
+      $totalCaseDhaka = "Select * from regiondata where Location = 'Dhaka City'";
 
       $totalRes = mysqli_query($con,$totalCaseDhaka);
 
