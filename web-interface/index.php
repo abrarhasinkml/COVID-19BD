@@ -5,11 +5,11 @@
 
       $sql = "Select * from iedcrdata";
 
-      $regionData = "Select * from regiondata";
+      $regionData = "SELECT * FROM `regiondata`";
 
-      $dhakaData = "Select * from dhakadata";
+      $dhakaData = "Select * from `dhakadata`";
 
-      $totalCaseDhaka = "Select * from regiondata where Location = 'Dhaka City'";
+      $totalCaseDhaka = "Select * from `regiondata` where Location = 'Dhaka City'";
 
       $totalRes = mysqli_query($con,$totalCaseDhaka);
 
@@ -624,7 +624,7 @@
                           <td> <a href="https://www.ittefaq.com.bd/national">Ittefaq </a></br>
                                <a href="https://www.prothomalo.com/bangladesh">Prothom Alo </a> </br>
                                <a href="https://www.bbc.com/bengali">BBC Bangla </a> </br>
-                               <a href="https://bangla.bdnews24.com/covid19-awareness-video/">Ntv BD </a>
+                               <a href="https://www.dhakatribune.com/">Dhaka Tribune </a>
                           </td>
                         </tr>
                         <tr>
@@ -828,6 +828,9 @@
           },
           options: {
             responsive:true,
+            legend: {
+                display: false,
+            },
               scales: {
                   yAxes: [{
                       ticks: {
