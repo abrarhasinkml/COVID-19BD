@@ -14,9 +14,11 @@ from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
 import datetime
 
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
 try:
     iedcr_web="https://www.iedcr.gov.bd/"
-    request_web=requests.get(iedcr_web).text
+    request_web=requests.get(iedcr_web, headers).text
     soup=BeautifulSoup(request_web, 'html.parser')
     dash=soup.findAll('a')
     
@@ -41,7 +43,6 @@ try:
     dhakaData=tables[2].df
     dhakaData2=tables[3].df
     dhakaData3=tables[4].df
-    #dhakaData3=tables[3].df
     dhakaData=pd.concat([dhakaData, dhakaData2, dhakaData3], ignore_index=True)
     regionData=pd.concat([regionData, regionData2], ignore_index=True)
     ##Let's try converting it to lat long##
