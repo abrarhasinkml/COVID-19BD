@@ -39,12 +39,12 @@ try:
     reader=open('temp.pdf', 'rb')
     tables=camelot.read_pdf('temp.pdf', pages='1-end')
     regionData=tables[0].df
-    regionData2=tables[1].df
-    dhakaData=tables[2].df
-    dhakaData2=tables[3].df
-    dhakaData3=tables[4].df
+    #regionData2=tables[1].df
+    dhakaData=tables[1].df
+    dhakaData2=tables[2].df
+    dhakaData3=tables[3].df
     dhakaData=pd.concat([dhakaData, dhakaData2, dhakaData3], ignore_index=True)
-    regionData=pd.concat([regionData, regionData2], ignore_index=True)
+    #regionData=pd.concat([regionData, regionData2], ignore_index=True)
     ##Let's try converting it to lat long##
     
     def convert_to_latLong(x, y):
@@ -72,8 +72,8 @@ try:
     regionData.drop('Latitude Longitude', axis='columns', inplace=True)
     regionData.set_index('District City', inplace=True)
     regionData.drop('index', axis=1, inplace=True)
-    dhakaData.columns=dhakaData.iloc[0]
-    dhakaData.drop(index=0, inplace=True)
+    dhakaData.columns=dhakaData.iloc[38]
+    dhakaData.drop(index=38, inplace=True)
     dhakaData['Latitude Longitude']=dhakaData['Location'].apply(lambda x: convert_to_latLong(x, "Dhaka"))
     dhakaData[['Latitude','Longitude']]=pd.DataFrame(dhakaData['Latitude Longitude'].tolist(), index=dhakaData.index)
     dhakaData.drop('Latitude Longitude', axis='columns', inplace=True)
