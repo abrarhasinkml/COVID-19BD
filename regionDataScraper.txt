@@ -12,3 +12,5 @@
 >>>>>>> 9d3a2d5fe0e53a51de5a925b8ad832522a080a9d
 '2020-04-17' data could not be read
 '2020-04-18' data could not be read
+'2020-04-19' data could not be read
+'2020-04-19' data could not be read

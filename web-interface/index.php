@@ -1,100 +1,6 @@
 <?php
 
-      include("config.php");
-      mysqli_set_charset($con,"utf8");
-
-      $sql = "Select * from iedcrdata";
-
-      $regionData = "SELECT * FROM `regiondata`";
-
-      $dhakaData = "Select * from `dhakadata`";
-
-      $totalCaseDhaka = "Select * from `regiondata` where Location = 'Dhaka City'";
-
-      $totalRes = mysqli_query($con,$totalCaseDhaka);
-
-      $totData = mysqli_fetch_array($totalRes);
-
-      $dhaka = $totData['Freq.'];
-
-      $res = mysqli_query($con,$sql);
-
-      $regionRes = mysqli_query($con,$regionData);
-      $dhakaRes = mysqli_query($con,$dhakaData);
-
-      $date = array();
-      $totalTests = array();
-      $testsInPreviousDay = array();
-      $positiveCases = array();
-      $last24HoursCases = array();
-      $recovered = array();
-      $deathCases = array();
-      $recoveryRate = array();
-      $deathRate = array();
-      $newRecoveries = array();
-      $deathsInLast24Hours = array();
-
-      $dateString = array();
-
-      while ($row = mysqli_fetch_array($res)) {
-
-        $date[] = $row['Date'];
-        $totalTests[] = $row['TOTAL COVID-19 TESTS'];
-        $testsInPreviousDay[] = $row['LAST 24 Hours Test'];
-        $positiveCases[] = $row['Covid-19 Positive Cases'];
-        $last24HoursCases[] = $row['Last 24Hours Cases'];
-        $recovered[] = $row['Recovered'];
-        $deathCases[] = $row['Death Cases'];
-        $recoveryRate[] = $row['Recovery Rate'];
-        $deathRate[] = $row['Death Rate'];
-        $newRecoveries[] = $row['New Recoveries'];
-        $deathsInLast24Hours[] = $row['Deaths in last 24 hours'];
-      }
-
-      $count = count($totalTests);
-
-      $percentagePositive = ($last24HoursCases[$count-1] / $positiveCases[$count-2]) * 100;
-
-      $percentageDeath = ($deathsInLast24Hours[$count-1] / $deathCases[$count-2]) * 100;
-
-      $percentageRecovery = $recoveryRate[$count-1] - $recoveryRate[$count-2];
-
-      $percentageDeathRate = $deathRate[$count-1] - $deathRate[$count-2];
-
-      for($i = 0; $i <= $count-1; $i++)
-      {
-        $dateString[] = date('jS F', strtotime($date[$i]));
-      }
-
-      $underTreatment = $positiveCases[$count-1] - $recovered[$count-1] - $deathCases[$count-1];
-
-      $openCases = round(($underTreatment / $positiveCases[$count-1]) * 100);
-
-      $pieData = [round($recoveryRate[$count-1]), round($deathRate[$count-1]), $openCases];
-
-      $regionLocation = array();
-      $regionFreq = array();
-
-      $areaLocation = array();
-      $areaFreq = array();
-
-      while ($row = mysqli_fetch_array($regionRes)) {
-
-          $regionLocation[] = $row['Location'];
-          $regionFreq[] = $row['Freq.'];
-      }
-
-      while ($row = mysqli_fetch_array($dhakaRes)) {
-
-          $areaLocation[] = $row['Location'];
-          $areaFreq[] = $row['Freq.'];
-      }
-
-      $covidSql = "SELECT * FROM `covidnews` WHERE `Title` LIKE '%করোনা%' OR `Title` LIKE '%CORONA%'";
-      $covidRes = mysqli_query($con,$covidSql);
-
-      $awareSql = "SELECT * from awarenessnews";
-      $awareRes = mysqli_query($con,$awareSql);
+      include("requests.php");
 
 ?>
 
@@ -218,11 +124,16 @@
                         <li><a href="" id="dailyDeaths">Daily Deaths</a></li>
                     </ul>
                   </li>
+                  <li><a href="regionmap.php"><i class="fa fa-home"></i> Regional Map <span class="fa"></span></a>
+                  </li>
+                  <li><a href="map.php"><i class="fa fa-home"></i> Dhaka Map <span class="fa"></span></a>
+                  </li>
                 </ul>
-
               </div>
             </div>
             <!-- /sidebar menu  -->
+
+
 
           </div>
         </div>
@@ -230,65 +141,11 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
-          <div class="row" style="display: inline-block;" >
-          <div class="tile_count">
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Tests</span>
-              <div class="count"><?php echo $totalTests[$count-1]; ?></div>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Last 24 Hours Test</span>
-              <div class="count"><?php echo $testsInPreviousDay[$count-1]; ?></div>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Positive Cases</span>
-              <div class="count red"><?php echo $positiveCases[$count-1]; ?></div>
-              <span class="count_bottom"><?php if($percentagePositive > 0) echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentagePositive,2) .'%</i> From last day</span>'; ?>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Death Cases</span>
-              <div class="count red"><?php echo $deathCases[$count-1]; ?></div>
-              <span class="count_bottom"><?php if($percentageDeath > 0) echo '<i class="green"><i class="fa fa-sort-asc"></i>'.round($percentageDeath) .'%</i> From last day</span>'; ?>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Recovery Rate</span>
-              <div class="count green"><?php echo round($recoveryRate[$count-1],2); ?>%</div>
-              <span class="count_bottom">
-                <?php
-                  if(round($percentageRecovery,2) > 0)
-                    echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageRecovery,2) .'%</i> From last day</span>';
-                  else if(round($percentageRecovery,2) == 0)
-                    echo '<i class="green">' .abs(round($percentageRecovery)) .'%</i> From last day</span>';
-                  else
-                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageRecovery,2)) .'%</i> From last day</span>';
-                ?>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Death Rate</span>
-              <div class="count red"><?php echo round($deathRate[$count-1],2); ?>%</div>
-              <span class="count_bottom">
-                <?php
-                  if($deathRate[$count-1] > $deathRate[$count-2])
-                    echo '<i class="green"><i class="fa fa-sort-asc"></i>' .round($percentageDeathRate) .'%</i> From last day</span>';
-                  else if(round($deathRate[$count-1] - $deathRate[$count-2],2) == 0)
-                    echo '<i class="green">' .abs(round($percentageDeathRate)) .'%</i> From last day</span>';
-                  else
-                    echo '<i class="red"><i class="fa fa-sort-desc"></i>' .abs(round($percentageDeathRate,2)) .'%</i> From last day</span>';
-                ?>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Recoveries in Last 24 Hours</span>
-              <div class="count green"><?php echo $newRecoveries[$count-1]; ?></div>
-            </div>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Deaths in Last 24 Hours</span>
-              <div class="count red"><?php echo $deathsInLast24Hours[$count-1]; ?></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p>Last Updated: <?php echo date('jS F Y', strtotime($date[$count-1])); ?><p>
-        </div>
+          <?php
+
+            include("stats.php");
+
+          ?>
           <!-- /top tiles -->
 
           <div class="row">
