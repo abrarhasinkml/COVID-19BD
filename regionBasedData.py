@@ -72,8 +72,8 @@ try:
     regionData.drop('Latitude Longitude', axis='columns', inplace=True)
     regionData.set_index('District City', inplace=True)
     regionData.drop('index', axis=1, inplace=True)
-    dhakaData.columns=dhakaData.iloc[38]
-    dhakaData.drop(index=38, inplace=True)
+    dhakaData.columns=dhakaData.iloc[0]
+    dhakaData.drop(index=0, inplace=True)
     dhakaData['Latitude Longitude']=dhakaData['Location'].apply(lambda x: convert_to_latLong(x, "Dhaka"))
     dhakaData[['Latitude','Longitude']]=pd.DataFrame(dhakaData['Latitude Longitude'].tolist(), index=dhakaData.index)
     dhakaData.drop('Latitude Longitude', axis='columns', inplace=True)
@@ -94,10 +94,11 @@ try:
                 b=rs[1]
                 c=rs[2]
                 d=rs[3]
-                query="insert into {} values ('{}', {}, {}, {})".format(tableName,a,b,c,d) 
+                query="insert into {} values (%s, %s, %s, %s)".format(tableName) 
                 #query="insert into iedcrdata values ("+ a +",'"+ b +"','"+ c +"','"+ d +"','"+ e +"','"+ f +"','"+ g +"','"+ h +"','"+ i +"','"+ j +"','"+ k +"')" 
                 #print(query)
-                cur.execute(query)
+                vals=(a,b,c,d)
+                cur.execute(query,vals)
             conn.commit()
             cur.close()
         except Error as e:
