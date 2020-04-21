@@ -48,7 +48,7 @@ for i in subNews:
     src=ittefaq_url
     news=[d,title,image,link,src]
     newsLists.append(news)
-    
+
 ##SCRAPPER FOR NTV_BD##
 #ntv_base="https://www.ntvbd.com"
 #ntv_req=requests.get(ntv_bd).text
@@ -67,7 +67,7 @@ for i in subNews:
 #        src=ntv_base
 #        news=[d, title, image, link, src]
 #        newsLists.append(news)
-        
+
 ##SCRAPPER FOR PROTHOM ALO##
 prothomalo_base="https://www.prothomalo.com"
 pa_req=requests.get(prothom_alo).text
@@ -92,8 +92,8 @@ for j in subtopContent:
     src=prothomalo_base
     news=[d,title,image,link,src]
     newsLists.append(news)
-    
-    
+
+
 ##SCRAPPER FOR BBC BANGLA##
 bbc_base='https://www.bbc.com'
 bbc_req=requests.get(bbc_bangla, headers=headers).text
@@ -136,7 +136,7 @@ for i in findlinks:
     source=dtlink
     news=[d,title,image,url,source]
     newsLists.append(news)
-            
+
 
 ##BANGLA DT##
 bdtlink="https://bangla.dhakatribune.com/articles/bangladesh"
@@ -157,11 +157,11 @@ for i in bfindlinks:
      news=[d,title,image,url,src]
      newsLists.append(news)
      time.sleep(2)
-     
+
 
 ##NOW CREATING A DATAFRAME FROM THE NESTED LISTS##
 
-newsUpdate=pd.DataFrame(newsLists, columns=columns) 
+newsUpdate=pd.DataFrame(newsLists, columns=columns)
 ##PUSH TO DB##
 def DftoSql(dataframe, tableName):
     try:
@@ -176,7 +176,7 @@ def DftoSql(dataframe, tableName):
             i=rs[2]
             l=rs[3]
             s=rs[4]
-            query="insert into {} values ('{}', %s,%s,%s,%s)".format(tableName, d) 
+            query="insert into {} values ('{}', %s,%s,%s,%s)".format(tableName, d)
             vals=(T,i,l,s)
             #print(query)
             cur.execute(query, vals)

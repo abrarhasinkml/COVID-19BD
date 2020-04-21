@@ -14,3 +14,9 @@
 '2020-04-18' data could not be read
 '2020-04-19' data could not be read
 '2020-04-19' data could not be read
+'2020-04-20' data could not be read
+'2020-04-21' data could not be read
+'2020-04-21' data could not be read
+'2020-04-21' data could not be read
+'2020-04-21' data could not be read
+'2020-04-21' data could not be read

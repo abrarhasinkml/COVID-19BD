@@ -40,10 +40,11 @@ try:
     tables=camelot.read_pdf('temp.pdf', pages='1-end')
     regionData=tables[0].df
     #regionData2=tables[1].df
-    dhakaData=tables[1].df
-    dhakaData2=tables[2].df
-    dhakaData3=tables[3].df
-    dhakaData=pd.concat([dhakaData, dhakaData2, dhakaData3], ignore_index=True)
+    dhakaData=tables[4].df
+    dhakaData2=tables[3].df
+    dhakaData3=tables[2].df
+    dhakaData4=tables[1].df
+    dhakaData=pd.concat([dhakaData, dhakaData2, dhakaData3, dhakaData4], ignore_index=True)
     #regionData=pd.concat([regionData, regionData2], ignore_index=True)
     ##Let's try converting it to lat long##
     
@@ -61,6 +62,7 @@ try:
     
     regionData.drop(labels=0, axis=1, inplace=True)
     regionData.drop(labels=3, axis=1,inplace=True)
+    regionData.drop(labels=4, axis=1, inplace=True)
     regionData[3]=regionData[1].map(lambda x:re.sub(r'\W+', ' ', x))    
     regionData.drop(labels=1, axis=1, inplace=True)
     
@@ -72,8 +74,8 @@ try:
     regionData.drop('Latitude Longitude', axis='columns', inplace=True)
     regionData.set_index('District City', inplace=True)
     regionData.drop('index', axis=1, inplace=True)
-    dhakaData.columns=dhakaData.iloc[38]
-    dhakaData.drop(index=38, inplace=True)
+    dhakaData.columns=dhakaData.iloc[0]
+    dhakaData.drop(index=0, inplace=True)
     dhakaData['Latitude Longitude']=dhakaData['Location'].apply(lambda x: convert_to_latLong(x, "Dhaka"))
     dhakaData[['Latitude','Longitude']]=pd.DataFrame(dhakaData['Latitude Longitude'].tolist(), index=dhakaData.index)
     dhakaData.drop('Latitude Longitude', axis='columns', inplace=True)
@@ -94,10 +96,11 @@ try:
                 b=rs[1]
                 c=rs[2]
                 d=rs[3]
-                query="insert into {} values ('{}', {}, {}, {})".format(tableName,a,b,c,d) 
+                query="insert into {} values (%s, %s, %s, %s)".format(tableName) 
                 #query="insert into iedcrdata values ("+ a +",'"+ b +"','"+ c +"','"+ d +"','"+ e +"','"+ f +"','"+ g +"','"+ h +"','"+ i +"','"+ j +"','"+ k +"')" 
                 #print(query)
-                cur.execute(query)
+                vals=(a,b,c,d)
+                cur.execute(query,vals)
             conn.commit()
             cur.close()
         except Error as e:
