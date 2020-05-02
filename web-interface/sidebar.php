@@ -4,10 +4,12 @@
       <li><a href="index.php"><i class="fa fa-home"></i> Home <span class="fa"></span></a>
 
       </li>
-      <li><a href="regionmap.php"><i class="fa fa-home"></i> Regional Map <span class="fa"></span></a>
+      <li><a href="regionmap.php"><i class="fa far fa-map"></i> Regional Map <span class="fa"></span></a>
       </li>
-      <li><a href="map.php"><i class="fa fa-home"></i> Dhaka Map <span class="fa"></span></a>
+      <li><a href="map.php"><i class="fa far fa-map"></i> Dhaka Map <span class="fa"></span></a>
       </li>
+        <li><a href="forum.php"><i class="fa fa-weixin"></i> Forum <span class="fa"></span></a>
+                  </li>
     </ul>
     <br>
     <!--

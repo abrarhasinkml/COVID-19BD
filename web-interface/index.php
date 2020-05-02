@@ -114,7 +114,7 @@
                   <li><a href="index.php"><i class="fa fa-home"></i> Home <span class="fa"></span></a>
 
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-area-chart"></i> Data Presentation<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="" id="rate">Death/Recovery Rate</a></li>
                         <li><a href="" id="deathRecovery">Death Vs Recovery</a></li>
@@ -124,9 +124,11 @@
                         <li><a href="" id="dailyDeaths">Daily Deaths</a></li>
                     </ul>
                   </li>
-                  <li><a href="regionmap.php"><i class="fa fa-home"></i> Regional Map <span class="fa"></span></a>
+                  <li><a href="regionmap.php"><i class="fa fas fa-map"></i> Regional Map <span class="fa"></span></a>
                   </li>
-                  <li><a href="map.php"><i class="fa fa-home"></i> Dhaka Map <span class="fa"></span></a>
+                  <li><a href="map.php"><i class="fa far fa-map"></i> Dhaka Map <span class="fa"></span></a>
+                  </li>
+                    <li><a href="forum.php"><i class="fa fa-weixin"></i> Forum <span class="fa"></span></a>
                   </li>
                 </ul>
               </div>
